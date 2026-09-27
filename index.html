@@ -2,70 +2,227 @@
 <html lang="hi">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Radhika Boutique — Owner Store</title>
+<title>Radhika Boutique</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,Arial;background:#fff7fb;color:#291f28}button,input,select,textarea{font:inherit}button{cursor:pointer}
-header{background:#8d285b;color:#fff;padding:14px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;top:0;z-index:5}.brand{font-size:23px;font-weight:800}
-.wrap{max-width:1150px;margin:auto;padding:24px 5%}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.tab{padding:10px 14px;border:0;border-radius:10px;background:#eee}.tab.active,.primary{background:#8d285b;color:#fff}
-.panel{background:#fff;border:1px solid #eadbe3;border-radius:16px;padding:18px;margin-bottom:18px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
-.card{border:1px solid #eadbe3;border-radius:14px;overflow:hidden;background:#fff}.photo{height:230px;background:#f4dfeb;display:flex;align-items:center;justify-content:center;color:#8d285b}.photo img{width:100%;height:100%;object-fit:cover}.body{padding:13px}.price{font-weight:800;font-size:20px;color:#8d285b}.muted{color:#6f6470;font-size:13px}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.small{padding:8px 10px;border:0;border-radius:8px}.danger{background:#ffe5e9;color:#a21b34}.soft{background:#eee}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin:10px 0}.field label{display:block;font-weight:700;font-size:14px;margin-bottom:5px}input,select,textarea{width:100%;padding:11px;border:1px solid #d8ccd3;border-radius:9px;background:#fff}textarea{min-height:90px}.modal{display:none;position:fixed;inset:0;background:#0008;z-index:20;padding:18px;overflow:auto}.box{max-width:650px;background:#fff;margin:25px auto;padding:20px;border-radius:16px}.close{float:right}.notice{padding:12px;border-radius:10px;background:#fff3d8;margin:10px 0}.stat{font-size:27px;font-weight:800}.hide{display:none}.topline{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,Arial;background:#fff7fb;color:#291f28}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+header{background:#8d285b;color:#fff;padding:14px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;top:0;z-index:5}
+.brand{font-size:23px;font-weight:800}.wrap{max-width:1150px;margin:auto;padding:24px 5%}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.tab{padding:10px 14px;border:0;border-radius:10px;background:#eee}
+.tab.active,.primary{background:#8d285b;color:#fff}.panel{background:#fff;border:1px solid #eadbe3;border-radius:16px;padding:18px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.card{border:1px solid #eadbe3;border-radius:14px;overflow:hidden;background:#fff}.photo{height:230px;background:#f4dfeb;display:flex;align-items:center;justify-content:center;color:#8d285b}
+.photo img{width:100%;height:100%;object-fit:cover}.body{padding:13px}.price{font-weight:800;font-size:20px;color:#8d285b}
+.muted{color:#6f6470;font-size:13px}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.small{padding:8px 10px;border:0;border-radius:8px}
+.danger{background:#ffe5e9;color:#a21b34}.soft{background:#eee}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{margin:10px 0}.field label{display:block;font-weight:700;font-size:14px;margin-bottom:5px}
+input,select,textarea{width:100%;padding:11px;border:1px solid #d8ccd3;border-radius:9px;background:#fff}textarea{min-height:90px}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:20;padding:18px;overflow:auto}.box{max-width:650px;background:#fff;margin:25px auto;padding:20px;border-radius:16px}
+.close{float:right}.notice{padding:12px;border-radius:10px;background:#fff3d8;margin:10px 0}.hide{display:none}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.status{padding:8px 12px;border-radius:10px;background:#f2e7ee;color:#6b2749}
 @media(max-width:600px){.row{grid-template-columns:1fr}.photo{height:210px}.brand{font-size:19px}}
-</style></head>
+</style>
+</head>
 <body>
-<header><div><div class="brand">🌸 Radhika Boutique</div><div class="muted" style="color:#f7dce9">Owner-controlled online store</div></div><button class="small" id="adminBtn">Admin Panel</button></header>
+<header>
+  <div><div class="brand">ðŸŒ¸ Radhika Boutique</div><div class="muted" style="color:#f7dce9">Ladies Fashion</div></div>
+  <div class="actions">
+    <span id="authStatus" class="status">Customer</span>
+    <button class="small" id="loginBtn">Owner Login</button>
+    <button class="small hide" id="logoutBtn">Logout</button>
+  </div>
+</header>
+
 <div class="wrap">
-<div class="tabs"><button class="tab active" data-tab="store">🛍️ Store</button><button class="tab" data-tab="manage">⚙️ Manage Products</button><button class="tab" data-tab="settings">🏪 Store Settings</button><button class="tab" data-tab="backup">💾 Backup</button></div>
+<div class="tabs">
+  <button class="tab active" data-tab="store">ðŸ›ï¸ Store</button>
+  <button class="tab hide" id="manageTab" data-tab="manage">âš™ï¸ Manage Products</button>
+  <button class="tab" data-tab="settings">ðŸª Store Settings</button>
+</div>
 
 <section id="store" class="section">
-<div class="panel"><div class="topline"><div><h2>Radhika Boutique</h2><div class="muted">Ladies fashion — WhatsApp & online order ready</div></div><input id="search" style="max-width:300px" placeholder="कपड़ा खोजें..."></div></div>
-<div id="storeGrid" class="grid"></div></section>
+<div class="panel"><div class="topline">
+  <div><h2>Radhika Boutique</h2><div class="muted">Ladies fashion â€” WhatsApp order</div></div>
+  <input id="search" style="max-width:300px" placeholder="à¤•à¤ªà¤¡à¤¼à¤¾ à¤–à¥‹à¤œà¥‡à¤‚...">
+</div></div>
+<div id="storeGrid" class="grid"></div>
+</section>
 
 <section id="manage" class="section hide">
-<div class="panel"><div class="topline"><h2>Products — पूरा नियंत्रण</h2><button class="primary small" id="addBtn">+ नया कपड़ा</button></div><p class="muted">यहाँ से आप किसी भी product को जोड़, edit या delete कर सकते हैं।</p></div>
-<div id="manageGrid" class="grid"></div></section>
+<div class="panel"><div class="topline"><h2>Products â€” à¤ªà¥‚à¤°à¤¾ à¤¨à¤¿à¤¯à¤‚à¤¤à¥à¤°à¤£</h2><button class="primary small" id="addBtn">+ à¤¨à¤¯à¤¾ à¤•à¤ªà¤¡à¤¼à¤¾</button></div>
+<p class="muted">Owner login à¤•à¥‡ à¤¬à¤¾à¤¦ à¤†à¤ª product à¤œà¥‹à¤¡à¤¼, edit à¤”à¤° delete à¤•à¤° à¤¸à¤•à¤¤à¥‡ à¤¹à¥ˆà¤‚à¥¤</p></div>
+<div id="manageGrid" class="grid"></div>
+</section>
 
 <section id="settings" class="section hide">
 <div class="panel"><h2>Store Settings</h2>
-<div class="row"><div class="field"><label>WhatsApp नंबर</label><input id="wa"></div><div class="field"><label>Store Name</label><input id="storeName"></div></div>
-<div class="field"><label>Store tagline</label><input id="tagline"></div>
-<button class="primary small" id="saveSettings">Settings Save करें</button>
-<div class="notice">Online payment को live करने के लिए payment gateway account/credentials जोड़ने होंगे। इस demo में payment button सुरक्षित रूप से placeholder है; कोई fake payment नहीं बनाया गया है।</div>
+<div class="row"><div class="field"><label>WhatsApp à¤¨à¤‚à¤¬à¤°</label><input id="wa" value="919376713661"></div>
+<div class="field"><label>Store Name</label><input id="storeName" value="Radhika Boutique"></div></div>
+<div class="field"><label>Store tagline</label><input id="tagline" value="Ladies Fashion"></div>
+<button class="primary small" id="saveSettings">Settings Save à¤•à¤°à¥‡à¤‚</button>
+<div class="notice">WhatsApp ordering à¤…à¤­à¥€ active à¤¹à¥ˆà¥¤ Online payment à¤¬à¤¾à¤¦ à¤®à¥‡à¤‚ à¤œà¥‹à¤¡à¤¼à¤¾ à¤œà¤¾ à¤¸à¤•à¤¤à¤¾ à¤¹à¥ˆà¥¤</div>
 </div></section>
-
-<section id="backup" class="section hide">
-<div class="panel"><h2>आपका Data आपके हाथ में</h2><p>Products और settings का JSON backup डाउनलोड करें या पहले से saved backup वापस import करें।</p>
-<div class="actions"><button class="primary small" id="exportBtn">⬇️ Backup Download</button><label class="small soft">⬆️ Backup Import <input id="importFile" type="file" accept=".json" style="display:none"></label><button class="small danger" id="resetBtn">Demo Data Reset</button></div></div></section>
 </div>
 
-<div id="modal" class="modal"><div class="box"><button class="small close" id="close">✕</button><h2 id="modalTitle">नया कपड़ा</h2>
+<div id="loginModal" class="modal"><div class="box">
+<button class="small close" id="loginClose">âœ•</button><h2>Owner Login</h2>
+<p class="muted">à¤…à¤ªà¤¨à¤¾ Supabase owner email à¤”à¤° password à¤¯à¤¹à¤¾à¤ à¤–à¥à¤¦ à¤¦à¤°à¥à¤œ à¤•à¤°à¥‡à¤‚à¥¤</p>
+<form id="loginForm">
+<div class="field"><label>Email</label><input id="loginEmail" type="email" required></div>
+<div class="field"><label>Password</label><input id="loginPassword" type="password" required></div>
+<button class="primary small" type="submit">Login</button>
+</form>
+<p id="loginMsg" class="muted"></p>
+</div></div>
+
+<div id="modal" class="modal"><div class="box">
+<button class="small close" id="close">âœ•</button><h2 id="modalTitle">à¤¨à¤¯à¤¾ à¤•à¤ªà¤¡à¤¼à¤¾</h2>
 <form id="form"><input id="pid" type="hidden">
-<div class="field"><label>नाम</label><input id="name" required></div>
-<div class="row"><div class="field"><label>कीमत ₹</label><input id="price" type="number" min="0" required></div><div class="field"><label>Category</label><select id="cat"><option>Kurti</option><option>Suit</option><option>Saree</option><option>Lehenga</option><option>Dress</option><option>Other</option></select></div></div>
-<div class="row"><div class="field"><label>Sizes</label><input id="sizes" placeholder="S, M, L, XL"></div><div class="field"><label>Stock</label><input id="stock" type="number" min="0" value="1"></div></div>
-<div class="field"><label>Product Photo</label><input id="image" type="file" accept="image/*"><div id="preview" class="muted"></div></div>
+<div class="field"><label>à¤¨à¤¾à¤®</label><input id="name" required></div>
+<div class="row"><div class="field"><label>à¤•à¥€à¤®à¤¤ â‚¹</label><input id="price" type="number" min="0" required></div>
+<div class="field"><label>Category</label><select id="cat"><option>Kurti</option><option>Suit</option><option>Saree</option><option>Lehenga</option><option>Dress</option><option>Other</option></select></div></div>
+<div class="row"><div class="field"><label>Sizes</label><input id="sizes" placeholder="S, M, L, XL"></div>
+<div class="field"><label>Stock</label><input id="stock" type="number" min="0" value="1"></div></div>
+<div class="field"><label>Product Photo URL</label><input id="imageUrl" type="url" placeholder="https://..."><div id="preview" class="muted"></div></div>
 <div class="field"><label>Description</label><textarea id="desc"></textarea></div>
 <button class="primary small" type="submit">Save Product</button></form></div></div>
 
 <script>
-const KEY='radhika_owner_store_v2';
-let state=JSON.parse(localStorage.getItem(KEY)||'null')||{settings:{name:'Radhika Boutique',wa:'919376713661',tagline:'Ladies Fashion'},products:[
-{id:'1',name:'Elegant Anarkali Suit',price:1499,cat:'Suit',sizes:'M, L, XL',stock:10,image:'',desc:'Beautiful ladies suit'},
-{id:'2',name:'Printed Kurti',price:799,cat:'Kurti',sizes:'S, M, L, XL',stock:15,image:'',desc:'Comfortable stylish kurti'}
-]};
-function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+const SUPABASE_URL = "https://cyrgxudoglgxrxhhbqhm.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_ZUlHsX8Q7k62xjyHC6HrwQ_Hz34qefz";
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+let products = [];
+let session = null;
+let settings = {name:"Radhika Boutique", wa:"919376713661", tagline:"Ladies Fashion"};
+
+const $ = id => document.getElementById(id);
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function productCard(p,owner=false){return `<article class="card"><div class="photo">${p.image?`<img src="${p.image}" alt="${esc(p.name)}">`:'📷 Photo'}</div><div class="body"><h3>${esc(p.name)}</h3><div class="price">₹${Number(p.price).toLocaleString('en-IN')}</div><div class="muted">${esc(p.cat)} · Sizes: ${esc(p.sizes||'All')} · Stock: ${p.stock}</div><p>${esc(p.desc||'')}</p>${owner?`<div class="actions"><button class="small primary" data-edit="${p.id}">✏️ Edit</button><button class="small danger" data-del="${p.id}">🗑️ Delete</button></div>`:`<div class="actions"><button class="small primary" data-order="${p.id}">Add to WhatsApp Order</button></div>`}</div></article>`}
-function render(){let q=document.getElementById('search').value.toLowerCase();let ps=state.products.filter(p=>p.name.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q));document.getElementById('storeGrid').innerHTML=ps.map(p=>productCard(p)).join('')||'<p>No products.</p>';document.getElementById('manageGrid').innerHTML=state.products.map(p=>productCard(p,true)).join('')}
-function openModal(p=null){document.getElementById('modal').style.display='block';document.getElementById('modalTitle').textContent=p?'Edit Product':'नया कपड़ा';document.getElementById('pid').value=p?.id||'';document.getElementById('name').value=p?.name||'';document.getElementById('price').value=p?.price??'';document.getElementById('cat').value=p?.cat||'Kurti';document.getElementById('sizes').value=p?.sizes||'';document.getElementById('stock').value=p?.stock??1;document.getElementById('desc').value=p?.desc||'';document.getElementById('image').value='';document.getElementById('preview').textContent=p?.image?'Existing photo kept unless a new photo is selected.':''}
-function closeModal(){document.getElementById('modal').style.display='none'}
-function imageData(file){return new Promise((res,rej)=>{if(!file)return res('');let r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)})}
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.section').forEach(x=>x.classList.add('hide'));document.getElementById(b.dataset.tab).classList.remove('hide')});
-document.getElementById('addBtn').onclick=()=>openModal();document.getElementById('close').onclick=closeModal;document.getElementById('search').oninput=render;
-document.getElementById('form').onsubmit=async e=>{e.preventDefault();let id=document.getElementById('pid').value, old=state.products.find(p=>p.id===id), file=document.getElementById('image').files[0], img=await imageData(file);let p={id:id||Date.now().toString(),name:document.getElementById('name').value.trim(),price:Number(document.getElementById('price').value),cat:document.getElementById('cat').value,sizes:document.getElementById('sizes').value.trim(),stock:Number(document.getElementById('stock').value),image:img||old?.image||'',desc:document.getElementById('desc').value.trim()};if(!p.name||p.price<0||p.stock<0)return alert('नाम, कीमत और stock सही भरें।');if(old)state.products=state.products.map(x=>x.id===id?p:x);else state.products.unshift(p);save();render();closeModal();alert('Product save हो गया।')};
-document.addEventListener('click',e=>{let id=e.target.dataset.edit;if(id)openModal(state.products.find(p=>p.id===id));let del=e.target.dataset.del;if(del&&confirm('इस product को delete करना है?')){state.products=state.products.filter(p=>p.id!==del);save();render()}let oid=e.target.dataset.order;if(oid){let p=state.products.find(x=>x.id===oid);let msg=encodeURIComponent(`नमस्ते Radhika Boutique, मुझे "${p.name}" (₹${p.price}) ऑर्डर करना है।`);window.open('https://wa.me/'+state.settings.wa+'?text='+msg,'_blank')}});
-document.getElementById('saveSettings').onclick=()=>{state.settings.wa=document.getElementById('wa').value.replace(/\D/g,'');state.settings.name=document.getElementById('storeName').value.trim()||'Radhika Boutique';state.settings.tagline=document.getElementById('tagline').value.trim();save();alert('Settings save हो गईं।')};
-document.getElementById('exportBtn').onclick=()=>{let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(state,null,2)],{type:'application/json'}));a.download='radhika-boutique-backup.json';a.click()};
-document.getElementById('importFile').onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.products||!x.settings)throw 0;state=x;save();render();alert('Backup restore हो गया।')}catch{alert('Invalid backup file')}};r.readAsText(f)};
-document.getElementById('resetBtn').onclick=()=>{if(confirm('Demo data reset करना है? आपका current data हट जाएगा।')){localStorage.removeItem(KEY);location.reload()}};
-document.getElementById('wa').value=state.settings.wa;document.getElementById('storeName').value=state.settings.name;document.getElementById('tagline').value=state.settings.tagline;render();
-</script></body></html>
+
+function productCard(p, owner=false){
+  return `<article class="card">
+    <div class="photo">${p.image_url?`<img src="${esc(p.image_url)}" alt="${esc(p.name)}">`:'ðŸ“· Photo'}</div>
+    <div class="body"><h3>${esc(p.name)}</h3>
+    <div class="price">â‚¹${Number(p.price||0).toLocaleString('en-IN')}</div>
+    <div class="muted">${esc(p.category||'')} Â· Sizes: ${esc(p.size||'All')} Â· Stock: ${Number(p.stock||0)}</div>
+    <p>${esc(p.description||'')}</p>
+    ${owner
+      ? `<div class="actions"><button class="small primary" data-edit="${p.id}">âœï¸ Edit</button><button class="small danger" data-del="${p.id}">ðŸ—‘ï¸ Delete</button></div>`
+      : `<div class="actions"><button class="small primary" data-order="${p.id}">WhatsApp Order</button></div>`}
+    </div></article>`;
+}
+
+function render(){
+  const q = $('search').value.toLowerCase();
+  const ps = products.filter(p => (p.name||'').toLowerCase().includes(q) || (p.category||'').toLowerCase().includes(q));
+  $('storeGrid').innerHTML = ps.map(p=>productCard(p)).join('') || '<p>No products.</p>';
+  $('manageGrid').innerHTML = products.map(p=>productCard(p,true)).join('') || '<p>No products.</p>';
+}
+
+async function loadProducts(){
+  const {data,error} = await sb.from('products').select('*').order('created_at',{ascending:false});
+  if(error){ console.error(error); $('storeGrid').innerHTML='<div class="panel">Products load à¤¨à¤¹à¥€à¤‚ à¤¹à¥à¤à¥¤ Supabase table/policies check à¤•à¤°à¥‡à¤‚.</div>'; return; }
+  products = data || [];
+  render();
+}
+
+function setAuthUI(){
+  const logged = !!session;
+  $('authStatus').textContent = logged ? 'Owner' : 'Customer';
+  $('loginBtn').classList.toggle('hide', logged);
+  $('logoutBtn').classList.toggle('hide', !logged);
+  $('manageTab').classList.toggle('hide', !logged);
+}
+
+function openModal(p=null){
+  $('modal').style.display='block';
+  $('modalTitle').textContent=p?'Edit Product':'à¤¨à¤¯à¤¾ à¤•à¤ªà¤¡à¤¼à¤¾';
+  $('pid').value=p?.id||'';
+  $('name').value=p?.name||'';
+  $('price').value=p?.price??'';
+  $('cat').value=p?.category||'Kurti';
+  $('sizes').value=p?.size||'';
+  $('stock').value=p?.stock??1;
+  $('imageUrl').value=p?.image_url||'';
+  $('desc').value=p?.description||'';
+}
+function closeModal(){$('modal').style.display='none'}
+
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  document.querySelectorAll('.section').forEach(x=>x.classList.add('hide'));
+  $(b.dataset.tab).classList.remove('hide');
+});
+
+$('loginBtn').onclick=()=>{$('loginModal').style.display='block';$('loginMsg').textContent=''};
+$('loginClose').onclick=()=>{$('loginModal').style.display='none'};
+$('logoutBtn').onclick=async()=>{await sb.auth.signOut();};
+
+$('loginForm').onsubmit=async e=>{
+  e.preventDefault();
+  $('loginMsg').textContent='Login à¤¹à¥‹ à¤°à¤¹à¤¾ à¤¹à¥ˆ...';
+  const {error}=await sb.auth.signInWithPassword({email:$('loginEmail').value.trim(),password:$('loginPassword').value});
+  $('loginMsg').textContent=error ? 'Login failed: '+error.message : 'Login à¤¸à¤«à¤²à¥¤';
+  if(!error) $('loginModal').style.display='none';
+};
+
+$('addBtn').onclick=()=>openModal();
+$('close').onclick=closeModal;
+$('search').oninput=render;
+
+$('form').onsubmit=async e=>{
+  e.preventDefault();
+  if(!session) return alert('à¤ªà¤¹à¤²à¥‡ Owner Login à¤•à¤°à¥‡à¤‚.');
+  const id=$('pid').value;
+  const payload={
+    name:$('name').value.trim(),
+    price:Number($('price').value),
+    category:$('cat').value,
+    size:$('sizes').value.trim(),
+    stock:Number($('stock').value),
+    image_url:$('imageUrl').value.trim(),
+    description:$('desc').value.trim()
+  };
+  if(!payload.name || payload.price<0 || payload.stock<0) return alert('à¤¨à¤¾à¤®, à¤•à¥€à¤®à¤¤ à¤”à¤° stock à¤¸à¤¹à¥€ à¤­à¤°à¥‡à¤‚à¥¤');
+  let result;
+  if(id) result=await sb.from('products').update(payload).eq('id',id);
+  else result=await sb.from('products').insert(payload);
+  if(result.error) return alert('Save failed: '+result.error.message);
+  closeModal(); await loadProducts(); alert('Product save à¤¹à¥‹ à¤—à¤¯à¤¾à¥¤');
+};
+
+document.addEventListener('click',async e=>{
+  const id=e.target.dataset.edit;
+  if(id){ const p=products.find(x=>String(x.id)===String(id)); if(p) openModal(p); }
+  const del=e.target.dataset.del;
+  if(del && confirm('à¤‡à¤¸ product à¤•à¥‹ delete à¤•à¤°à¤¨à¤¾ à¤¹à¥ˆ?')){
+    const {error}=await sb.from('products').delete().eq('id',del);
+    if(error) alert('Delete failed: '+error.message); else await loadProducts();
+  }
+  const oid=e.target.dataset.order;
+  if(oid){
+    const p=products.find(x=>String(x.id)===String(oid));
+    if(!p) return;
+    const msg=encodeURIComponent(`à¤¨à¤®à¤¸à¥à¤¤à¥‡ Radhika Boutique, à¤®à¥à¤à¥‡ "${p.name}" (â‚¹${p.price}) à¤‘à¤°à¥à¤¡à¤° à¤•à¤°à¤¨à¤¾ à¤¹à¥ˆà¥¤`);
+    window.open('https://wa.me/'+settings.wa+'?text='+msg,'_blank');
+  }
+});
+
+$('saveSettings').onclick=()=>{
+  settings.wa=$('wa').value.replace(/\D/g,'');
+  settings.name=$('storeName').value.trim()||'Radhika Boutique';
+  settings.tagline=$('tagline').value.trim()||'Ladies Fashion';
+  alert('Settings à¤‡à¤¸ browser à¤®à¥‡à¤‚ save à¤¹à¥à¤ˆà¤‚à¥¤');
+};
+
+sb.auth.onAuthStateChange((_event,s)=>{session=s;setAuthUI();});
+(async()=>{
+  const {data:{session:s}}=await sb.auth.getSession();
+  session=s; setAuthUI(); await loadProducts();
+})();
+</script>
+</body>
+</html>
