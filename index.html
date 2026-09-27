@@ -85,7 +85,7 @@ input,select,textarea{width:100%;padding:11px;border:1px solid #d8ccd3;border-ra
 <div class="field"><label>Category</label><select id="cat"><option>Kurti</option><option>Suit</option><option>Saree</option><option>Lehenga</option><option>Dress</option><option>Other</option></select></div></div>
 <div class="row"><div class="field"><label>Sizes</label><input id="sizes" placeholder="S, M, L, XL"></div>
 <div class="field"><label>Stock</label><input id="stock" type="number" min="0" value="1"></div></div>
-<div class="field"><label>Product Photo URL</label><input id="imageUrl" type="url" placeholder="https://..."><div id="preview" class="muted"></div></div>
+<div class="field"><label>Product Photo</label><input id="imageFile" type="file" accept="image/*"><div id="preview" class="muted"></div></div>
 <div class="field"><label>Description</label><textarea id="desc"></textarea></div>
 <button class="primary small" type="submit">Save Product</button></form></div></div>
 
@@ -145,7 +145,8 @@ function openModal(p=null){
   $('cat').value=p?.category||'Kurti';
   $('sizes').value=p?.size||'';
   $('stock').value=p?.stock??1;
-  $('imageUrl').value=p?.image_url||'';
+  $('imageFile').value='';
+  $('preview').innerHTML=p?.image_url ? '<div class="muted">Current photo:</div><img src="'+esc(p.image_url)+'" alt="Current product photo" style="max-width:140px;max-height:140px;border-radius:10px;margin-top:6px;object-fit:cover">' : '<span class="muted">No photo selected yet.</span>';
   $('desc').value=p?.description||'';
 }
 function closeModal(){$('modal').style.display='none'}
@@ -183,10 +184,26 @@ $('form').onsubmit=async e=>{
     category:$('cat').value,
     size:$('sizes').value.trim(),
     stock:Number($('stock').value),
-    image_url:$('imageUrl').value.trim(),
+    image_url:'',
     description:$('desc').value.trim()
   };
   if(!payload.name || payload.price<0 || payload.stock<0) return alert('\u0928\u093E\u092E, \u0915\u0940\u092E\u0924 \u0914\u0930 stock \u0938\u0939\u0940 \u092D\u0930\u0947\u0902\u0964');
+
+  const existing = id ? products.find(x=>String(x.id)===String(id)) : null;
+  payload.image_url = existing?.image_url || '';
+
+  const file=$('imageFile').files[0];
+  if(file){
+    if(!file.type.startsWith('image/')) return alert('कृपया केवल image file चुनें।');
+    if(file.size > 10 * 1024 * 1024) return alert('Photo 10 MB से छोटी होनी चाहिए।');
+    const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+    const path=`products/${Date.now()}-${Math.random().toString(36).slice(2,8)}-${safeName}`;
+    $('preview').textContent='Photo upload हो रही है...';
+    const upload=await sb.storage.from('product-images').upload(path,file,{cacheControl:'3600',upsert:false,contentType:file.type});
+    if(upload.error) return alert('Photo upload failed: '+upload.error.message);
+    payload.image_url=sb.storage.from('product-images').getPublicUrl(path).data.publicUrl;
+  }
+
   let result;
   if(id) result=await sb.from('products').update(payload).eq('id',id);
   else result=await sb.from('products').insert(payload);
