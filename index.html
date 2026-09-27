@@ -27,7 +27,7 @@ input,select,textarea{width:100%;padding:11px;border:1px solid #d8ccd3;border-ra
 </head>
 <body>
 <header>
-  <div><div class="brand">ðŸŒ¸ Radhika Boutique</div><div class="muted" style="color:#f7dce9">Ladies Fashion</div></div>
+  <div><div class="brand">Radhika Boutique</div><div class="muted" style="color:#f7dce9">Ladies Fashion</div></div>
   <div class="actions">
     <span id="authStatus" class="status">Customer</span>
     <button class="small" id="loginBtn">Owner Login</button>
@@ -37,38 +37,38 @@ input,select,textarea{width:100%;padding:11px;border:1px solid #d8ccd3;border-ra
 
 <div class="wrap">
 <div class="tabs">
-  <button class="tab active" data-tab="store">ðŸ›ï¸ Store</button>
-  <button class="tab hide" id="manageTab" data-tab="manage">âš™ï¸ Manage Products</button>
-  <button class="tab" data-tab="settings">ðŸª Store Settings</button>
+  <button class="tab active" data-tab="store">Store</button>
+  <button class="tab hide" id="manageTab" data-tab="manage">Manage Products</button>
+  <button class="tab" data-tab="settings">Store Settings</button>
 </div>
 
 <section id="store" class="section">
 <div class="panel"><div class="topline">
-  <div><h2>Radhika Boutique</h2><div class="muted">Ladies fashion â€” WhatsApp order</div></div>
-  <input id="search" style="max-width:300px" placeholder="à¤•à¤ªà¤¡à¤¼à¤¾ à¤–à¥‹à¤œà¥‡à¤‚...">
+  <div><h2>Radhika Boutique</h2><div class="muted">Ladies fashion &#x2014; WhatsApp order</div></div>
+  <input id="search" style="max-width:300px" placeholder="&#x915;&#x92A;&#x921;&#x93C;&#x93E; &#x916;&#x94B;&#x91C;&#x947;&#x902;&#x2026;">
 </div></div>
 <div id="storeGrid" class="grid"></div>
 </section>
 
 <section id="manage" class="section hide">
-<div class="panel"><div class="topline"><h2>Products â€” à¤ªà¥‚à¤°à¤¾ à¤¨à¤¿à¤¯à¤‚à¤¤à¥à¤°à¤£</h2><button class="primary small" id="addBtn">+ à¤¨à¤¯à¤¾ à¤•à¤ªà¤¡à¤¼à¤¾</button></div>
-<p class="muted">Owner login à¤•à¥‡ à¤¬à¤¾à¤¦ à¤†à¤ª product à¤œà¥‹à¤¡à¤¼, edit à¤”à¤° delete à¤•à¤° à¤¸à¤•à¤¤à¥‡ à¤¹à¥ˆà¤‚à¥¤</p></div>
+<div class="panel"><div class="topline"><h2>Products &#x2014; &#x92A;&#x942;&#x930;&#x93E; &#x928;&#x93F;&#x92F;&#x902;&#x924;&#x94D;&#x930;&#x923;</h2><button class="primary small" id="addBtn">+ &#x928;&#x92F;&#x93E; &#x915;&#x92A;&#x921;&#x93C;&#x93E;</button></div>
+<p class="muted">Owner login &#x915;&#x947; &#x92C;&#x93E;&#x926; &#x906;&#x92A; product &#x91C;&#x94B;&#x921;&#x93C;, edit &#x914;&#x930; delete &#x915;&#x930; &#x938;&#x915;&#x924;&#x947; &#x939;&#x948;&#x902;&#x964;</p></div>
 <div id="manageGrid" class="grid"></div>
 </section>
 
 <section id="settings" class="section hide">
 <div class="panel"><h2>Store Settings</h2>
-<div class="row"><div class="field"><label>WhatsApp à¤¨à¤‚à¤¬à¤°</label><input id="wa" value="919376713661"></div>
+<div class="row"><div class="field"><label>WhatsApp &#x928;&#x902;&#x92C;&#x930;</label><input id="wa" value="919376713661"></div>
 <div class="field"><label>Store Name</label><input id="storeName" value="Radhika Boutique"></div></div>
 <div class="field"><label>Store tagline</label><input id="tagline" value="Ladies Fashion"></div>
-<button class="primary small" id="saveSettings">Settings Save à¤•à¤°à¥‡à¤‚</button>
-<div class="notice">WhatsApp ordering à¤…à¤­à¥€ active à¤¹à¥ˆà¥¤ Online payment à¤¬à¤¾à¤¦ à¤®à¥‡à¤‚ à¤œà¥‹à¤¡à¤¼à¤¾ à¤œà¤¾ à¤¸à¤•à¤¤à¤¾ à¤¹à¥ˆà¥¤</div>
+<button class="primary small" id="saveSettings">Settings Save &#x915;&#x930;&#x947;&#x902;</button>
+<div class="notice">WhatsApp ordering &#x905;&#x92D;&#x940; active &#x939;&#x948;&#x964; Online payment &#x92C;&#x93E;&#x926; &#x92E;&#x947;&#x902; &#x91C;&#x94B;&#x921;&#x93C;&#x93E; &#x91C;&#x93E; &#x938;&#x915;&#x924;&#x93E; &#x939;&#x948;&#x964;</div>
 </div></section>
 </div>
 
 <div id="loginModal" class="modal"><div class="box">
-<button class="small close" id="loginClose">âœ•</button><h2>Owner Login</h2>
-<p class="muted">à¤…à¤ªà¤¨à¤¾ Supabase owner email à¤”à¤° password à¤¯à¤¹à¤¾à¤ à¤–à¥à¤¦ à¤¦à¤°à¥à¤œ à¤•à¤°à¥‡à¤‚à¥¤</p>
+<button class="small close" id="loginClose">&#x2715;</button><h2>Owner Login</h2>
+<p class="muted">&#x905;&#x92A;&#x928;&#x93E; Supabase owner email &#x914;&#x930; password &#x92F;&#x939;&#x93E;&#x901; &#x916;&#x941;&#x926; &#x926;&#x930;&#x94D;&#x91C; &#x915;&#x930;&#x947;&#x902;&#x964;</p>
 <form id="loginForm">
 <div class="field"><label>Email</label><input id="loginEmail" type="email" required></div>
 <div class="field"><label>Password</label><input id="loginPassword" type="password" required></div>
@@ -78,10 +78,10 @@ input,select,textarea{width:100%;padding:11px;border:1px solid #d8ccd3;border-ra
 </div></div>
 
 <div id="modal" class="modal"><div class="box">
-<button class="small close" id="close">âœ•</button><h2 id="modalTitle">à¤¨à¤¯à¤¾ à¤•à¤ªà¤¡à¤¼à¤¾</h2>
+<button class="small close" id="close">&#x2715;</button><h2 id="modalTitle">&#x928;&#x92F;&#x93E; &#x915;&#x92A;&#x921;&#x93C;&#x93E;</h2>
 <form id="form"><input id="pid" type="hidden">
-<div class="field"><label>à¤¨à¤¾à¤®</label><input id="name" required></div>
-<div class="row"><div class="field"><label>à¤•à¥€à¤®à¤¤ â‚¹</label><input id="price" type="number" min="0" required></div>
+<div class="field"><label>&#x928;&#x93E;&#x92E;</label><input id="name" required></div>
+<div class="row"><div class="field"><label>&#x915;&#x940;&#x92E;&#x924; &#x20B9;</label><input id="price" type="number" min="0" required></div>
 <div class="field"><label>Category</label><select id="cat"><option>Kurti</option><option>Suit</option><option>Saree</option><option>Lehenga</option><option>Dress</option><option>Other</option></select></div></div>
 <div class="row"><div class="field"><label>Sizes</label><input id="sizes" placeholder="S, M, L, XL"></div>
 <div class="field"><label>Stock</label><input id="stock" type="number" min="0" value="1"></div></div>
@@ -103,13 +103,13 @@ function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&l
 
 function productCard(p, owner=false){
   return `<article class="card">
-    <div class="photo">${p.image_url?`<img src="${esc(p.image_url)}" alt="${esc(p.name)}">`:'ðŸ“· Photo'}</div>
+    <div class="photo">${p.image_url?`<img src="${esc(p.image_url)}" alt="${esc(p.name)}">`:'\u1F4F7 Photo'}</div>
     <div class="body"><h3>${esc(p.name)}</h3>
-    <div class="price">â‚¹${Number(p.price||0).toLocaleString('en-IN')}</div>
-    <div class="muted">${esc(p.category||'')} Â· Sizes: ${esc(p.size||'All')} Â· Stock: ${Number(p.stock||0)}</div>
+    <div class="price">\u20B9${Number(p.price||0).toLocaleString('en-IN')}</div>
+    <div class="muted">${esc(p.category||'')} \u00B7 Sizes: ${esc(p.size||'All')} \u00B7 Stock: ${Number(p.stock||0)}</div>
     <p>${esc(p.description||'')}</p>
     ${owner
-      ? `<div class="actions"><button class="small primary" data-edit="${p.id}">âœï¸ Edit</button><button class="small danger" data-del="${p.id}">ðŸ—‘ï¸ Delete</button></div>`
+      ? `<div class="actions"><button class="small primary" data-edit="${p.id}">\u270F\uFE0F Edit</button><button class="small danger" data-del="${p.id}">\u1F5D1\uFE0F Delete</button></div>`
       : `<div class="actions"><button class="small primary" data-order="${p.id}">WhatsApp Order</button></div>`}
     </div></article>`;
 }
@@ -123,7 +123,7 @@ function render(){
 
 async function loadProducts(){
   const {data,error} = await sb.from('products').select('*').order('created_at',{ascending:false});
-  if(error){ console.error(error); $('storeGrid').innerHTML='<div class="panel">Products load à¤¨à¤¹à¥€à¤‚ à¤¹à¥à¤à¥¤ Supabase table/policies check à¤•à¤°à¥‡à¤‚.</div>'; return; }
+  if(error){ console.error(error); $('storeGrid').innerHTML='<div class="panel">Products load \u0928\u0939\u0940\u0902 \u0939\u0941\u090F\u0964 Supabase table/policies check \u0915\u0930\u0947\u0902\u0964</div>'; return; }
   products = data || [];
   render();
 }
@@ -138,7 +138,7 @@ function setAuthUI(){
 
 function openModal(p=null){
   $('modal').style.display='block';
-  $('modalTitle').textContent=p?'Edit Product':'à¤¨à¤¯à¤¾ à¤•à¤ªà¤¡à¤¼à¤¾';
+  $('modalTitle').textContent=p?'Edit Product':'\u0928\u092F\u093E \u0915\u092A\u0921\u093C\u093E';
   $('pid').value=p?.id||'';
   $('name').value=p?.name||'';
   $('price').value=p?.price??'';
@@ -163,9 +163,9 @@ $('logoutBtn').onclick=async()=>{await sb.auth.signOut();};
 
 $('loginForm').onsubmit=async e=>{
   e.preventDefault();
-  $('loginMsg').textContent='Login à¤¹à¥‹ à¤°à¤¹à¤¾ à¤¹à¥ˆ...';
+  $('loginMsg').textContent='Login \u0939\u094B \u0930\u0939\u093E \u0939\u0948...';
   const {error}=await sb.auth.signInWithPassword({email:$('loginEmail').value.trim(),password:$('loginPassword').value});
-  $('loginMsg').textContent=error ? 'Login failed: '+error.message : 'Login à¤¸à¤«à¤²à¥¤';
+  $('loginMsg').textContent=error ? 'Login failed: '+error.message : 'Login \u0938\u092B\u0932\u0964';
   if(!error) $('loginModal').style.display='none';
 };
 
@@ -175,7 +175,7 @@ $('search').oninput=render;
 
 $('form').onsubmit=async e=>{
   e.preventDefault();
-  if(!session) return alert('à¤ªà¤¹à¤²à¥‡ Owner Login à¤•à¤°à¥‡à¤‚.');
+  if(!session) return alert('\u092A\u0939\u0932\u0947 Owner Login \u0915\u0930\u0947\u0902\u0964');
   const id=$('pid').value;
   const payload={
     name:$('name').value.trim(),
@@ -186,19 +186,19 @@ $('form').onsubmit=async e=>{
     image_url:$('imageUrl').value.trim(),
     description:$('desc').value.trim()
   };
-  if(!payload.name || payload.price<0 || payload.stock<0) return alert('à¤¨à¤¾à¤®, à¤•à¥€à¤®à¤¤ à¤”à¤° stock à¤¸à¤¹à¥€ à¤­à¤°à¥‡à¤‚à¥¤');
+  if(!payload.name || payload.price<0 || payload.stock<0) return alert('\u0928\u093E\u092E, \u0915\u0940\u092E\u0924 \u0914\u0930 stock \u0938\u0939\u0940 \u092D\u0930\u0947\u0902\u0964');
   let result;
   if(id) result=await sb.from('products').update(payload).eq('id',id);
   else result=await sb.from('products').insert(payload);
   if(result.error) return alert('Save failed: '+result.error.message);
-  closeModal(); await loadProducts(); alert('Product save à¤¹à¥‹ à¤—à¤¯à¤¾à¥¤');
+  closeModal(); await loadProducts(); alert('Product save \u0939\u094B \u0917\u092F\u093E\u0964');
 };
 
 document.addEventListener('click',async e=>{
   const id=e.target.dataset.edit;
   if(id){ const p=products.find(x=>String(x.id)===String(id)); if(p) openModal(p); }
   const del=e.target.dataset.del;
-  if(del && confirm('à¤‡à¤¸ product à¤•à¥‹ delete à¤•à¤°à¤¨à¤¾ à¤¹à¥ˆ?')){
+  if(del && confirm('\u0907\u0938 product \u0915\u094B delete \u0915\u0930\u0928\u093E \u0939\u0948?')){
     const {error}=await sb.from('products').delete().eq('id',del);
     if(error) alert('Delete failed: '+error.message); else await loadProducts();
   }
@@ -206,7 +206,7 @@ document.addEventListener('click',async e=>{
   if(oid){
     const p=products.find(x=>String(x.id)===String(oid));
     if(!p) return;
-    const msg=encodeURIComponent(`à¤¨à¤®à¤¸à¥à¤¤à¥‡ Radhika Boutique, à¤®à¥à¤à¥‡ "${p.name}" (â‚¹${p.price}) à¤‘à¤°à¥à¤¡à¤° à¤•à¤°à¤¨à¤¾ à¤¹à¥ˆà¥¤`);
+    const msg=encodeURIComponent(`\u0928\u092E\u0938\u094D\u0924\u0947 Radhika Boutique, \u092E\u0941\u091D\u0947 "${p.name}" (\u20B9${p.price}) \u0911\u0930\u094D\u0921\u0930 \u0915\u0930\u0928\u093E \u0939\u0948\u0964`);
     window.open('https://wa.me/'+settings.wa+'?text='+msg,'_blank');
   }
 });
@@ -215,7 +215,7 @@ $('saveSettings').onclick=()=>{
   settings.wa=$('wa').value.replace(/\D/g,'');
   settings.name=$('storeName').value.trim()||'Radhika Boutique';
   settings.tagline=$('tagline').value.trim()||'Ladies Fashion';
-  alert('Settings à¤‡à¤¸ browser à¤®à¥‡à¤‚ save à¤¹à¥à¤ˆà¤‚à¥¤');
+  alert('Settings \u0907\u0938 browser \u092E\u0947\u0902 save \u0939\u0941\u0908\u0902\u0964');
 };
 
 sb.auth.onAuthStateChange((_event,s)=>{session=s;setAuthUI();});
